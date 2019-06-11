@@ -1,5 +1,11 @@
 
-enum ASTNode {
+struct ASTNode {
+	var kind: ASTNodeKind
+	var children: [ASTNode]
+	var info: [Token]
+}
+
+enum ASTNodeKind {
 	case sourceFile
 	case importDecl
 	case protocolDecl
@@ -24,5 +30,7 @@ enum ASTNode {
 	case varDecl
 	case dotSyntaxCallExpr
 	case parenExpr
+	
+	case unknown
 }
 

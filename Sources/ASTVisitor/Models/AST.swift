@@ -1,4 +1,4 @@
 
 struct AST {
-	let nodes: [ASTNode]
+	let children: [ASTNode]
 }
