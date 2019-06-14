@@ -18,18 +18,25 @@ final class Parser {
 	}
 	
 	private func extractChild(content: String, index: inout String.Index) -> ASTNode {
-		var token = Token(key: false, value: "")
+		var raw = ""
+		var token = Token(key: "", value: "")
 		var groupCounter = 0
 		var commaSet = Set<Character>()
 		let isInGroup = { groupCounter > 0 || !commaSet.isEmpty }
 		
-		var node = ASTNode(kind: .unknown, children: [], info: [])
+		var node = ASTNode(kind: .unspecified, children: [], info: [])
 		
 		while index != content.endIndex {
 			let char = content[index]
 			
 			switch char {
 			case ")":
+				if !raw.isEmpty {
+					token.value = raw
+					raw = ""
+					node.add(token: token)
+					token = Token(key: "", value: "")
+				}
 				// We should not increment index here cause it will be incremented lower on func stack recursion
 				return node
 				
@@ -52,24 +59,25 @@ final class Parser {
 				}
 				
 			case " " where isInGroup():
-				token.value.append(char)
+				raw.append(char)
 				
 			case " " where !isInGroup():
-				if !token.value.isEmpty {
-					node.info.append(token)
-					token = Token(key: false, value: "")
+				if !raw.isEmpty {
+					token.value = raw
+					raw = ""
+					node.add(token: token)
+					token = Token(key: "", value: "")
 				}
 				
 			case "=" where !isInGroup():
-				token.key = true
-				node.info.append(token)
-				token = Token(key: false, value: "")
+				token.key = raw
+				raw = ""
 				
 			case "\n", "\r", "\t":
 				break
 				
 			default:
-				token.value.append(char)
+				raw.append(char)
 			}
 			
 			index = content.index(after: index)

@@ -1,5 +1,5 @@
 
 struct Token {
-	var key: Bool
+	var key: String
 	var value: String
 }
