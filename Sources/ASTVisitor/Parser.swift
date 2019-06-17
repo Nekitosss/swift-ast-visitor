@@ -1,13 +1,5 @@
 
-import Foundation
-
 final class Parser {
-	
-	let groupingCharacterSet: CharacterSet = {
-		var set = CharacterSet()
-		set.insert(charactersIn: "\"<>[]'")
-		return set
-	}()
 	
 	func parse(content: String) -> AST {
 		
@@ -24,31 +16,49 @@ final class Parser {
 		var commaSet = Set<Character>()
 		let isInGroup = { groupCounter > 0 || !commaSet.isEmpty }
 		
-		var node = ASTNode(kind: .unspecified, children: [], info: [])
+		let node = ASTNode(kind: .unspecified, children: [], info: [])
 		
 		while index != content.endIndex {
 			let char = content[index]
 			
 			switch char {
 			case ")":
-				if !raw.isEmpty {
-					token.value = raw
-					raw = ""
-					node.add(token: token)
-					token = Token(key: "", value: "")
+				
+				if isInGroup() {
+					raw.append(char)
+					groupCounter -= 1
+				} else {
+					if !raw.isEmpty {
+						token.value = raw
+						raw = ""
+						node.add(token: token)
+						token = Token(key: "", value: "")
+					}
+					// We should not increment index here cause it will be incremented lower on func stack recursion
+					return node
 				}
-				// We should not increment index here cause it will be incremented lower on func stack recursion
-				return node
+				
 				
 			case "(":
-				index = content.index(after: index)
-				let childNode = extractChild(content: content, index: &index)
-				node.children.append(childNode)
+				let previousChar = content[elementBefore: index]
+				if isInGroup() {
+					raw.append(char)
+					groupCounter += 1
+				} else if previousChar == " " || previousChar == nil {
+					index = content.index(after: index)
+					let childNode = extractChild(content: content, index: &index)
+					node.children.append(childNode)
+				} else {
+					raw.append(char)
+					groupCounter += 1
+				}
+				
 				
 			case "<", "[":
 				groupCounter += 1
 				
 			case ">", "]":
+				// TODO: String -> Int неверно обрабатывается из-за ">"
 				groupCounter -= 1
 				
 			case "\"", "'":
@@ -79,6 +89,8 @@ final class Parser {
 			default:
 				raw.append(char)
 			}
+			
+			groupCounter = max(groupCounter, 0)
 			
 			index = content.index(after: index)
 		}

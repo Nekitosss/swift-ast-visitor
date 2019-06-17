@@ -5,11 +5,28 @@ final class ASTVisitorTests: XCTestCase {
 	
 	private let parser = Parser()
 	
+	
 	func testAstParsing() {
 		let file = fileContent(fileName: "TestComposedTypealiasFailure")
 		let ast = parser.parse(content: file)
 		
 		XCTAssertFalse(ast.children.isEmpty)
+	}
+	
+	func testAstVisiting() {
+		let file = fileContent(fileName: "TestComposedTypealiasFailure")
+		let visitor = Visitor(content: file)
+		
+		visitor.visit(predicate: { $0.kind == .declrefExpr }, visitChildNodesForFoundedPredicate: true) { node, parents in
+			
+			switch node.typedNode {
+			case .functionDeclaration(let info):
+				print(info)
+			case .unknown:
+				break
+			}
+		}
+		
 	}
 	
 }

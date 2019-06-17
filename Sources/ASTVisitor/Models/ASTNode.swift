@@ -1,19 +1,46 @@
 
-struct ASTNode {
-	var kind: ASTNodeKind
-	var children: [ASTNode]
-	var info: [Token]
+public class ASTNode {
+	public var kind: ASTNodeKind
+	public var children: [ASTNode]
+	public var info: [Token]
+	public lazy var typedNode = TypedNode(node: self)
 	
-	mutating func add(token: Token) {
+	init(kind: ASTNodeKind, children: [ASTNode], info: [Token]) {
+		self.kind = kind
+		self.children = children
+		self.info = info
+	}
+	
+	func add(token: Token) {
 		if kind == .unspecified {
 			kind = ASTNodeKind(rawValue: token.value) ?? .unknown
 		} else {
 			info.append(token)
 		}
 	}
+	
+	subscript(tokenKey key: TokenKey) -> Token? {
+		return self.info.first(where: { $0.key == key.rawValue })
+	}
+	
 }
 
-enum ASTNodeKind: String {
+public enum TypedNode {
+	case functionDeclaration(FunctionDeclaration)
+	case unknown
+	
+	init(node: ASTNode) {
+		switch node.kind {
+		case .funcDecl:
+			self = FunctionDeclaration(node: node).map { .functionDeclaration($0) } ?? .unknown
+		default:
+			self = .unknown
+		}
+	}
+	
+}
+
+public enum ASTNodeKind: String {
 	case sourceFile = "source_file"
 	case importDecl = "import_decl"
 	case protocolDecl = "protocol"

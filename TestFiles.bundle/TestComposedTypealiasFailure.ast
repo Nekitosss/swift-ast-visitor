@@ -2,20 +2,78 @@
   (import_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:9:1 - line:9:8] 'DITranquillity')
   (protocol range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:11:9 - line:11:30] "MyProtocol" <Self : MyProtocol> interface type='MyProtocol.Protocol' access=private non-resilient requirement signature=<Self>)
   (protocol range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:12:9 - line:12:36] "MySecondProtocol" <Self : MySecondProtocol> interface type='MySecondProtocol.Protocol' access=private non-resilient requirement signature=<Self>)
-  (class_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:14:9 - line:22:1] "Nested" interface type='Nested.Type' access=private non-resilient
-    (class_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:15:2 - line:21:2] "MyClass" interface type='Nested.MyClass.Type' access=internal non-resilient inherits: MyProtocol
-      (func_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:3 - line:19:3] "create(withInt:)" interface type='(Nested.MyClass.Type) -> (Int) -> MyTypealias' access=internal final type
+  (class_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:14:9 - line:24:1] "Nested" interface type='Nested.Type' access=private non-resilient
+    (class_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:15:2 - line:23:2] "MyClass" interface type='Nested.MyClass.Type' access=internal non-resilient inherits: MyProtocol
+      (pattern_binding_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:3 - line:17:28]
+        (pattern_typed type='String?'
+          (pattern_named type='String?' 'injectableStr')
+)
+        (dot_syntax_call_expr implicit type='String?' nothrow
+          (declref_expr implicit type='(String?.Type) -> String?' decl=Swift.(file).Optional.none [with (substitution_map generic_signature=<Wrapped> (substitution Wrapped -> String))] function_ref=unapplied)
+          (type_expr implicit type='String?.Type' typerepr='<<NULL>>')))
+      (var_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7] "injectableStr" type='String?' interface type='String?' access=internal readImpl=stored writeImpl=stored readWriteImpl=stored
+        (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7] 'anonname=0x7fdb96906d00' interface type='(Nested.MyClass) -> () -> String?' access=internal get_for=injectableStr
+          (parameter "self" interface type='Nested.MyClass')
+          (parameter_list)
+          (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+            (return_stmt implicit
+              (load_expr implicit type='String?'
+                (member_ref_expr implicit type='@lvalue String?' decl=Name.(file).Nested.MyClass.injectableStr@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 direct_to_storage
+                  (declref_expr implicit type='Nested.MyClass' decl=Name.(file).Nested.MyClass.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied))))))
+        (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7] 'anonname=0x7fdb96906ee8' interface type='(Nested.MyClass) -> (String?) -> ()' access=internal set_for=injectableStr
+          (parameter "self" interface type='Nested.MyClass')
+          (parameter_list
+            (parameter "value" interface type='String?') range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7])
+          (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+            (assign_expr implicit type='()'
+              (member_ref_expr implicit type='@lvalue String?' decl=Name.(file).Nested.MyClass.injectableStr@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 direct_to_storage
+                (declref_expr implicit type='Nested.MyClass' decl=Name.(file).Nested.MyClass.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied))
+              (declref_expr implicit type='String?' decl=Name.(file).Nested.MyClass.<anonymous>.value@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied))))
+        (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7] 'anonname=0x7fdb96907138' interface type='(Nested.MyClass) -> () -> ()' access=internal _modify_for=injectableStr
+          (parameter "self" interface type='Nested.MyClass')
+          (parameter_list)
+          (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+            (yield_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+              (inout_expr implicit type='inout String?'
+                (member_ref_expr implicit type='@lvalue String?' decl=Name.(file).Nested.MyClass.injectableStr@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 direct_to_impl
+                  (declref_expr implicit type='Nested.MyClass' decl=Name.(file).Nested.MyClass.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied)))))))
+      (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7] 'anonname=0x7fdb96906d00' interface type='(Nested.MyClass) -> () -> String?' access=internal get_for=injectableStr
+        (parameter "self" interface type='Nested.MyClass')
+        (parameter_list)
+        (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+          (return_stmt implicit
+            (load_expr implicit type='String?'
+              (member_ref_expr implicit type='@lvalue String?' decl=Name.(file).Nested.MyClass.injectableStr@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 direct_to_storage
+                (declref_expr implicit type='Nested.MyClass' decl=Name.(file).Nested.MyClass.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied))))))
+      (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7] 'anonname=0x7fdb96906ee8' interface type='(Nested.MyClass) -> (String?) -> ()' access=internal set_for=injectableStr
+        (parameter "self" interface type='Nested.MyClass')
+        (parameter_list
+          (parameter "value" interface type='String?') range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7])
+        (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+          (assign_expr implicit type='()'
+            (member_ref_expr implicit type='@lvalue String?' decl=Name.(file).Nested.MyClass.injectableStr@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 direct_to_storage
+              (declref_expr implicit type='Nested.MyClass' decl=Name.(file).Nested.MyClass.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied))
+            (declref_expr implicit type='String?' decl=Name.(file).Nested.MyClass.<anonymous>.value@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied))))
+      (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7] 'anonname=0x7fdb96907138' interface type='(Nested.MyClass) -> () -> ()' access=internal _modify_for=injectableStr
+        (parameter "self" interface type='Nested.MyClass')
+        (parameter_list)
+        (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+          (yield_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 - line:17:7]
+            (inout_expr implicit type='inout String?'
+              (member_ref_expr implicit type='@lvalue String?' decl=Name.(file).Nested.MyClass.injectableStr@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 direct_to_impl
+                (declref_expr implicit type='Nested.MyClass' decl=Name.(file).Nested.MyClass.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 function_ref=unapplied))))))
+      (func_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:19:3 - line:21:3] "create(withInt:)" interface type='(Nested.MyClass.Type) -> (Int) -> MyTypealias' access=internal final type
         (parameter "self" interface type='Nested.MyClass.Type')
         (parameter_list
-          (parameter "intValue" apiName=withInt interface type='Int') range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:21 - line:17:43])
+          (parameter "intValue" apiName=withInt interface type='Int') range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:19:21 - line:19:43])
         (result
           (type_ident
-            (component id='MyTypealias' bind=Name.(file).MyTypealias@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:23:19)))
-        (brace_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:60 - line:19:3]
-          (call_expr type='Never' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:4 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:4 - line:18:15] nothrow arg_labels=
-            (declref_expr type='(@autoclosure () -> String, StaticString, UInt) -> Never' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:4 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:4 - line:18:4] decl=Swift.(file).fatalError(_:file:line:) function_ref=single)
-            (tuple_shuffle_expr implicit type='(@autoclosure () -> String, file: StaticString, line: UInt)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:14 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:14 - line:18:15] tuple_to_tuple elements=[-1, -3, -3] variadic_sources=[] default_args_owner=Swift.(file).fatalError(_:file:line:)
-              (tuple_expr type='()' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:14 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:18:14 - line:18:15])))))
+            (component id='MyTypealias' bind=Name.(file).MyTypealias@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:25:19)))
+        (brace_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:19:60 - line:21:3]
+          (call_expr type='Never' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:4 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:4 - line:20:15] nothrow arg_labels=
+            (declref_expr type='(@autoclosure () -> String, StaticString, UInt) -> Never' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:4 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:4 - line:20:4] decl=Swift.(file).fatalError(_:file:line:) function_ref=single)
+            (tuple_shuffle_expr implicit type='(@autoclosure () -> String, file: StaticString, line: UInt)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:14 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:14 - line:20:15] tuple_to_tuple elements=[-1, -3, -3] variadic_sources=[] default_args_owner=Swift.(file).fatalError(_:file:line:)
+              (tuple_expr type='()' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:14 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:20:14 - line:20:15])))))
       (constructor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:15:8 - line:15:8] "init()" interface type='(Nested.MyClass.Type) -> () -> Nested.MyClass' access=internal designated
         (parameter "self" interface type='Nested.MyClass')
         (parameter_list)
@@ -34,82 +92,92 @@
       (parameter "self" interface type='Nested')
       (parameter_list)
       (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:14:15 - line:14:15])))
-  (typealias range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:23:9 - line:23:40] "MyTypealias" interface type='MyTypealias.Type' access=private type='Nested.MyClass')
-  (class_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:25:9 - line:38:1] "ParsablePart" interface type='ParsablePart.Type' access=private non-resilient inherits: DIPart
-    (pattern_binding_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:2 - line:31:4]
+  (typealias range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:25:9 - line:25:40] "MyTypealias" interface type='MyTypealias.Type' access=private type='Nested.MyClass')
+  (class_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:9 - line:41:1] "ParsablePart" interface type='ParsablePart.Type' access=private non-resilient inherits: DIPart
+    (pattern_binding_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:2 - line:33:4]
       (pattern_typed type='DIContainer'
         (pattern_named type='DIContainer' 'container')
         (type_ident
           (component id='DIContainer' bind=DITranquillity.(file).DIContainer)))
-      (call_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:38 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:38 - line:31:4] nothrow arg_labels=
-        (closure_expr type='() -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:38 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:38 - line:31:2] discriminator=0
-          (parameter_list range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:38 - line:27:38])
-          (brace_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:38 - line:31:2]
-            (pattern_binding_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:3 - line:28:31]
+      (call_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:38 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:38 - line:33:4] nothrow arg_labels=
+        (closure_expr type='() -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:38 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:38 - line:33:2] discriminator=0
+          (parameter_list range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:38 - line:29:38])
+          (brace_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:38 - line:33:2]
+            (pattern_binding_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:3 - line:30:31]
               (pattern_named type='DIContainer' 'container')
-              (call_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 - line:28:31] nothrow arg_labels=
-                (constructor_ref_call_expr type='(DIContainer?) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 - line:28:19] nothrow
-                  (declref_expr implicit type='(DIContainer.Type) -> (DIContainer?) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 - line:28:19] decl=DITranquillity.(file).DIContainer.init(parent:) function_ref=single)
-                  (type_expr type='DIContainer.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:19 - line:28:19] typerepr='DIContainer'))
-                (tuple_shuffle_expr implicit type='(parent: DIContainer?)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:30 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:30 - line:28:31] tuple_to_tuple elements=[-1] variadic_sources=[] default_args_owner=DITranquillity.(file).DIContainer.init(parent:)
-                  (tuple_expr type='()' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:30 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:30 - line:28:31]))))
+              (call_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 - line:30:31] nothrow arg_labels=
+                (constructor_ref_call_expr type='(DIContainer?) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 - line:30:19] nothrow
+                  (declref_expr implicit type='(DIContainer.Type) -> (DIContainer?) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 - line:30:19] decl=DITranquillity.(file).DIContainer.init(parent:) function_ref=single)
+                  (type_expr type='DIContainer.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:19 - line:30:19] typerepr='DIContainer'))
+                (tuple_shuffle_expr implicit type='(parent: DIContainer?)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:30 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:30 - line:30:31] tuple_to_tuple elements=[-1] variadic_sources=[] default_args_owner=DITranquillity.(file).DIContainer.init(parent:)
+                  (tuple_expr type='()' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:30 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:30 - line:30:31]))))
 
-            (var_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:7 - line:28:7] "container" type='DIContainer' interface type='DIContainer' access=private let readImpl=stored immutable)
+            (var_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:7 - line:30:7] "container" type='DIContainer' interface type='DIContainer' access=private let readImpl=stored immutable)
 
-            (call_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:3 - line:29:43] nothrow arg_labels=part:
-              (dot_syntax_call_expr type='(DIPart.Type) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:3 - line:29:13] nothrow
-                (declref_expr type='(DIContainer) -> (DIPart.Type) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 - line:29:13] decl=DITranquillity.(file).DIContainer extension.append(part:) function_ref=single)
-                (declref_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:3 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:3 - line:29:3] decl=Name.(file).ParsablePart.pattern binding initializer.explicit closure discriminator=0.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:7 function_ref=unapplied))
-              (tuple_expr type='(part: DIPart.Type)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:19 - line:29:43] names=part
-                (erasure_expr implicit type='DIPart.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:26 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:26 - line:29:39]
+            (call_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:3 - line:31:43] nothrow arg_labels=part:
+              (dot_syntax_call_expr type='(DIPart.Type) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:3 - line:31:13] nothrow
+                (declref_expr type='(DIContainer) -> (DIPart.Type) -> DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:13 - line:31:13] decl=DITranquillity.(file).DIContainer extension.append(part:) function_ref=single)
+                (declref_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:3 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:3 - line:31:3] decl=Name.(file).ParsablePart.pattern binding initializer.explicit closure discriminator=0.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:7 function_ref=unapplied))
+              (tuple_expr type='(part: DIPart.Type)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:19 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:19 - line:31:43] names=part
+                (erasure_expr implicit type='DIPart.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:26 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:26 - line:31:39]
                   (normal_conformance type=ParsablePart protocol=DIPart
-                    (value req=load(container:) witness=Name.(file).ParsablePart.load(container:)@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:33:14))
-                  (dot_self_expr type='ParsablePart.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:26 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:26 - line:29:39]
-                    (type_expr type='ParsablePart.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:26 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:26 - line:29:26] typerepr='ParsablePart')))))
-            (return_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:3 - line:30:10]
-              (declref_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:10 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:10 - line:30:10] decl=Name.(file).ParsablePart.pattern binding initializer.explicit closure discriminator=0.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:28:7 function_ref=unapplied))))
-        (tuple_expr type='()' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:3 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:3 - line:31:4])))
-    (var_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 - line:27:13] "container" type='DIContainer' interface type='DIContainer' access=internal final type let readImpl=stored immutable
-      (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 - line:27:13] 'anonname=0x7fed9b4582a8' interface type='(ParsablePart.Type) -> () -> DIContainer' access=internal final type get_for=container
+                    (value req=load(container:) witness=Name.(file).ParsablePart.load(container:)@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:14))
+                  (dot_self_expr type='ParsablePart.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:26 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:26 - line:31:39]
+                    (type_expr type='ParsablePart.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:26 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:31:26 - line:31:26] typerepr='ParsablePart')))))
+            (return_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:32:3 - line:32:10]
+              (declref_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:32:10 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:32:10 - line:32:10] decl=Name.(file).ParsablePart.pattern binding initializer.explicit closure discriminator=0.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:30:7 function_ref=unapplied))))
+        (tuple_expr type='()' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:33:3 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:33:3 - line:33:4])))
+    (var_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 - line:29:13] "container" type='DIContainer' interface type='DIContainer' access=internal final type let readImpl=stored immutable
+      (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 - line:29:13] 'anonname=0x7fdb95bfd920' interface type='(ParsablePart.Type) -> () -> DIContainer' access=internal final type get_for=container
         (parameter "self" interface type='ParsablePart.Type')
         (parameter_list)
-        (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 - line:27:13]
+        (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 - line:29:13]
           (return_stmt implicit
-            (member_ref_expr implicit type='DIContainer' decl=Name.(file).ParsablePart.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 direct_to_storage
-              (declref_expr implicit type='ParsablePart.Type' decl=Name.(file).ParsablePart.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 function_ref=unapplied))))))
-    (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 - line:27:13] 'anonname=0x7fed9b4582a8' interface type='(ParsablePart.Type) -> () -> DIContainer' access=internal final type get_for=container
+            (member_ref_expr implicit type='DIContainer' decl=Name.(file).ParsablePart.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 direct_to_storage
+              (declref_expr implicit type='ParsablePart.Type' decl=Name.(file).ParsablePart.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 function_ref=unapplied))))))
+    (accessor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 - line:29:13] 'anonname=0x7fdb95bfd920' interface type='(ParsablePart.Type) -> () -> DIContainer' access=internal final type get_for=container
       (parameter "self" interface type='ParsablePart.Type')
       (parameter_list)
-      (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 - line:27:13]
+      (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 - line:29:13]
         (return_stmt implicit
-          (member_ref_expr implicit type='DIContainer' decl=Name.(file).ParsablePart.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 direct_to_storage
-            (declref_expr implicit type='ParsablePart.Type' decl=Name.(file).ParsablePart.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 function_ref=unapplied)))))
-    (func_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:33:2 - line:36:2] "load(container:)" interface type='(ParsablePart.Type) -> (DIContainer) -> ()' access=internal final type
+          (member_ref_expr implicit type='DIContainer' decl=Name.(file).ParsablePart.container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 direct_to_storage
+            (declref_expr implicit type='ParsablePart.Type' decl=Name.(file).ParsablePart.<anonymous>.self@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:29:13 function_ref=unapplied)))))
+    (func_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:2 - line:39:2] "load(container:)" interface type='(ParsablePart.Type) -> (DIContainer) -> ()' access=internal final type
       (parameter "self" interface type='ParsablePart.Type')
       (parameter_list
-        (parameter "container" apiName=container interface type='DIContainer') range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:33:18 - line:33:41])
-      (brace_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:33:43 - line:36:2]
-        (call_expr type='DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:3 - line:35:44] nothrow arg_labels=_:
-          (dot_syntax_call_expr type='((MyProtocol & MySecondProtocol).Protocol) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:3 - line:35:5] nothrow
-            (declref_expr type='(DIComponentBuilder<MyTypealias>) -> ((MyProtocol & MySecondProtocol).Protocol) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:5 - line:35:5] decl=DITranquillity.(file).DIComponentBuilder extension.as [with (substitution_map generic_signature=<Impl, Parent> (substitution Impl -> MyTypealias) (substitution Parent -> (MyProtocol & MySecondProtocol)))] function_ref=single)
-            (call_expr type='DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:3 - line:34:40] nothrow arg_labels=_:
-              (dot_syntax_call_expr type='(String, Int, @escaping (Int) -> MyTypealias) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:3 - line:34:13] nothrow
-                (declref_expr type='(DIContainer) -> (String, Int, @escaping (Int) -> MyTypealias) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:13 - line:34:13] decl=DITranquillity.(file).DIContainer extension.register(file:line:_:) [with (substitution_map generic_signature=<Impl, P0> (substitution Impl -> MyTypealias) (substitution P0 -> Int))] function_ref=single)
-                (declref_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:3 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:3 - line:34:3] decl=Name.(file).ParsablePart.load(container:).container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:33:19 function_ref=unapplied))
-              (tuple_shuffle_expr implicit type='(file: String, line: Int, @escaping (Int) -> MyTypealias)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:21 - line:34:40] scalar_to_tuple elements=[-3, -3, 0] variadic_sources=[] default_args_owner=DITranquillity.(file).DIContainer extension.register(file:line:_:) [with (substitution_map generic_signature=<Impl, P0> (substitution Impl -> MyTypealias) (substitution P0 -> Int))]
-                (paren_expr type='(@escaping (Int) -> MyTypealias)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:21 - line:34:40]
-                  (dot_syntax_call_expr type='(Int) -> MyTypealias' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:22 - line:34:34] nothrow
-                    (declref_expr type='(Nested.MyClass.Type) -> (Int) -> MyTypealias' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:34 - line:34:34] decl=Name.(file).Nested.MyClass.create(withInt:)@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:15 function_ref=unapplied)
-                    (type_expr type='MyTypealias.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:22 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:34:22 - line:34:22] typerepr='MyTypealias'))))))
-          (paren_expr type='((MyProtocol & MySecondProtocol).Protocol)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:8 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:7 - line:35:44]
-            (dot_self_expr type='(MyProtocol & MySecondProtocol).Protocol' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:8 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:8 - line:35:40]
-              (type_expr type='(MyProtocol & MySecondProtocol).Protocol' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:8 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:8 - line:35:38] typerepr='(MyProtocol & MySecondProtocol)'))))))
-    (constructor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:25:15 - line:25:15] "init()" interface type='(ParsablePart.Type) -> () -> ParsablePart' access=internal designated
+        (parameter "container" apiName=container interface type='DIContainer') range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:18 - line:35:41])
+      (brace_stmt range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:43 - line:39:2]
+        (call_expr type='DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 - line:38:30] nothrow arg_labels=_:
+          (dot_syntax_call_expr type='(String?, Bool, ReferenceWritableKeyPath<MyTypealias, String?>) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 - line:38:5] nothrow
+            (declref_expr type='(DIComponentBuilder<MyTypealias>) -> (String?, Bool, ReferenceWritableKeyPath<MyTypealias, String?>) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:5 - line:38:5] decl=DITranquillity.(file).DIComponentBuilder extension.injection(name:cycle:_:) [with (substitution_map generic_signature=<Impl, Property> (substitution Impl -> MyTypealias) (substitution Property -> String?))] function_ref=single)
+            (call_expr type='DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 - line:37:44] nothrow arg_labels=_:
+              (dot_syntax_call_expr type='((MyProtocol & MySecondProtocol).Protocol) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 - line:37:5] nothrow
+                (declref_expr type='(DIComponentBuilder<MyTypealias>) -> ((MyProtocol & MySecondProtocol).Protocol) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:5 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:5 - line:37:5] decl=DITranquillity.(file).DIComponentBuilder extension.as [with (substitution_map generic_signature=<Impl, Parent> (substitution Impl -> MyTypealias) (substitution Parent -> (MyProtocol & MySecondProtocol)))] function_ref=single)
+                (call_expr type='DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 - line:36:40] nothrow arg_labels=_:
+                  (dot_syntax_call_expr type='(String, Int, @escaping (Int) -> MyTypealias) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 - line:36:13] nothrow
+                    (declref_expr type='(DIContainer) -> (String, Int, @escaping (Int) -> MyTypealias) -> DIComponentBuilder<MyTypealias>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:13 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:13 - line:36:13] decl=DITranquillity.(file).DIContainer extension.register(file:line:_:) [with (substitution_map generic_signature=<Impl, P0> (substitution Impl -> MyTypealias) (substitution P0 -> Int))] function_ref=single)
+                    (declref_expr type='DIContainer' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:3 - line:36:3] decl=Name.(file).ParsablePart.load(container:).container@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:35:19 function_ref=unapplied))
+                  (tuple_shuffle_expr implicit type='(file: String, line: Int, @escaping (Int) -> MyTypealias)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:21 - line:36:40] scalar_to_tuple elements=[-3, -3, 0] variadic_sources=[] default_args_owner=DITranquillity.(file).DIContainer extension.register(file:line:_:) [with (substitution_map generic_signature=<Impl, P0> (substitution Impl -> MyTypealias) (substitution P0 -> Int))]
+                    (paren_expr type='(@escaping (Int) -> MyTypealias)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:21 - line:36:40]
+                      (dot_syntax_call_expr type='(Int) -> MyTypealias' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:22 - line:36:34] nothrow
+                        (declref_expr type='(Nested.MyClass.Type) -> (Int) -> MyTypealias' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:34 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:34 - line:36:34] decl=Name.(file).Nested.MyClass.create(withInt:)@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:19:15 function_ref=unapplied)
+                        (type_expr type='MyTypealias.Type' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:22 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:36:22 - line:36:22] typerepr='MyTypealias'))))))
+              (paren_expr type='((MyProtocol & MySecondProtocol).Protocol)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:8 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:7 - line:37:44]
+                (dot_self_expr type='(MyProtocol & MySecondProtocol).Protocol' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:8 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:8 - line:37:40]
+                  (type_expr type='(MyProtocol & MySecondProtocol).Protocol' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:8 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:37:8 - line:37:38] typerepr='(MyProtocol & MySecondProtocol)')))))
+          (tuple_shuffle_expr implicit type='(name: String?, cycle: Bool, ReferenceWritableKeyPath<MyTypealias, String?>)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:15 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:14 - line:38:30] scalar_to_tuple elements=[-1, -1, 0] variadic_sources=[] default_args_owner=DITranquillity.(file).DIComponentBuilder extension.injection(name:cycle:_:) [with (substitution_map generic_signature=<Impl, Property> (substitution Impl -> MyTypealias) (substitution Property -> String?))]
+            (paren_expr type='(ReferenceWritableKeyPath<MyTypealias, String?>)' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:15 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:14 - line:38:30]
+              (keypath_expr type='ReferenceWritableKeyPath<MyTypealias, String?>' location=/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:15 range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:38:15 - line:38:17]
+                (component=property Name.(file).Nested.MyClass.injectableStr@/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:17:7 type=@lvalue String?)
+                <<null>>
+                (unresolved_dot_expr type='<null>' field 'injectableStr' function_ref=unapplied
+                  (key_path_dot_expr implicit type='<null>'))))))))
+    (constructor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:15 - line:27:15] "init()" interface type='(ParsablePart.Type) -> () -> ParsablePart' access=internal designated
       (parameter "self" interface type='ParsablePart')
       (parameter_list)
       (brace_stmt implicit
         (return_stmt implicit)))
-    (destructor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:25:15 - line:25:15] "deinit" interface type='(ParsablePart) -> () -> ()' access=fileprivate @objc
+    (destructor_decl implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:15 - line:27:15] "deinit" interface type='(ParsablePart) -> () -> ()' access=fileprivate @objc
       (parameter "self" interface type='ParsablePart')
       (parameter_list)
-      (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:25:15 - line:25:15]))))
+      (brace_stmt implicit range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:15 - line:27:15]))))
