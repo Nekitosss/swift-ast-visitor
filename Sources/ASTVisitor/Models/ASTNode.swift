@@ -71,6 +71,8 @@ public enum ASTNodeKind: String {
 	case erasureExpr = "erasure_expr"
 	case normalConformance = "normal_conformance"
 	case dotSelfExpr = "dot_self_expr"
+	case substitutionMap = "substitution_map"
+	case substitution = "substitution"
 	
 	case unspecified
 	case unknown

@@ -17,7 +17,7 @@ final class ASTVisitorTests: XCTestCase {
 		let file = fileContent(fileName: "TestComposedTypealiasFailure")
 		let visitor = Visitor(content: file)
 		
-		visitor.visit(predicate: { $0.kind == .declrefExpr }, visitChildNodesForFoundedPredicate: true) { node, parents in
+		visitor.visit(predicate: { $0.kind == .substitutionMap }, visitChildNodesForFoundedPredicate: true) { node, parents in
 			
 			switch node.typedNode {
 			case .functionDeclaration(let info):

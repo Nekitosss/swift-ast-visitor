@@ -12,9 +12,9 @@ final class Parser {
 	private func extractChild(content: String, index: inout String.Index) -> ASTNode {
 		var raw = ""
 		var token = Token(key: "", value: "")
-		var groupCounter = 0
+		var group: [Character: Int] = [:]
 		var commaSet = Set<Character>()
-		let isInGroup = { groupCounter > 0 || !commaSet.isEmpty }
+		let isInGroup = { group.reduce(0, { $0 + $1.value }) > 0 }
 		
 		let node = ASTNode(kind: .unspecified, children: [], info: [])
 		
@@ -26,7 +26,7 @@ final class Parser {
 				
 				if isInGroup() {
 					raw.append(char)
-					groupCounter -= 1
+					group["(", default: 0] -= 1
 				} else {
 					if !raw.isEmpty {
 						token.value = raw
@@ -43,29 +43,39 @@ final class Parser {
 				let previousChar = content[elementBefore: index]
 				if isInGroup() {
 					raw.append(char)
-					groupCounter += 1
+					group["(", default: 0] += 1
 				} else if previousChar == " " || previousChar == nil {
 					index = content.index(after: index)
 					let childNode = extractChild(content: content, index: &index)
 					node.children.append(childNode)
 				} else {
 					raw.append(char)
-					groupCounter += 1
+					group["(", default: 0] -= 1
 				}
 				
 				
-			case "<", "[":
-				groupCounter += 1
+			case "<":
+				group["<", default: 0] += 1
 				
-			case ">", "]":
+			case ">":
+				group["<", default: 0] -= 1
+				
+			case "]":
 				// TODO: String -> Int неверно обрабатывается из-за ">"
-				groupCounter -= 1
+				group["[", default: 0] -= 1
+				
+			case "[":
+				if content[elementBefore: index] != " " {
+					group["[", default: 0] += 1
+				}
 				
 			case "\"", "'":
 				if commaSet.contains(char) {
 					commaSet.remove(char)
+					group[char, default: 0] -= 1
 				} else {
 					commaSet.insert(char)
+					group[char, default: 0] += 1
 				}
 				
 			case " " where isInGroup():
@@ -90,7 +100,9 @@ final class Parser {
 				raw.append(char)
 			}
 			
-			groupCounter = max(groupCounter, 0)
+			for element in group {
+				group[element.key] = max(element.value, 0)
+			}
 			
 			index = content.index(after: index)
 		}
