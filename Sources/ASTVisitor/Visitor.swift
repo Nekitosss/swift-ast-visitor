@@ -17,7 +17,6 @@ public final class Visitor {
 	
 	public func visit(predicate: (ASTNode) -> Bool, visitChildNodesForFoundedPredicate: Bool, handler: (ASTNode, [ASTNode]) -> Void) {
 		let ast = self.parser.parse(content: content)
-		guard let rootNode = ast.children.first else { return }
 		
 		withoutActuallyEscaping(predicate) { predicate in
 			withoutActuallyEscaping(handler) { handler in
@@ -32,7 +31,7 @@ public final class Visitor {
 					}
 				}
 				
-				iterate(nodes: rootNode.children, parents: [], predicateWasFoundInParent: false)
+				iterate(nodes: ast.children, parents: [], predicateWasFoundInParent: false)
 			}
 		}
 		

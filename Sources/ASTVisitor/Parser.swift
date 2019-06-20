@@ -1,12 +1,15 @@
 
 final class Parser {
 	
+	let whitespaceOrNewline = Set<Character>(["\n", "\r", "\t", " "])
+	
 	func parse(content: String) -> AST {
 		
 		var startIndex = content.startIndex
 		let node = extractChild(content: content, index: &startIndex)
+		let astChildren = node.children.isEmpty ? [node] : node.children
 		
-		return AST(children: [node])
+		return AST(children: astChildren)
 	}
 	
 	private func extractChild(content: String, index: inout String.Index) -> ASTNode {
@@ -15,6 +18,10 @@ final class Parser {
 		var group: [Character: Int] = [:]
 		var commaSet = Set<Character>()
 		let isInGroup = { group.reduce(0, { $0 + $1.value }) > 0 }
+		let isInConcreteGroup: (Character) -> Bool = { group[$0, default: 0] > 0 }
+		let isWhitespaceOrNewline: (Character?) -> Bool = {
+			$0.map({ self.whitespaceOrNewline.contains($0) }) ?? true
+		}
 		
 		let node = ASTNode(kind: .unspecified, children: [], info: [])
 		
@@ -44,20 +51,26 @@ final class Parser {
 				if isInGroup() {
 					raw.append(char)
 					group["(", default: 0] += 1
-				} else if previousChar == " " || previousChar == nil {
+				} else if isWhitespaceOrNewline(previousChar) {
 					index = content.index(after: index)
 					let childNode = extractChild(content: content, index: &index)
 					node.children.append(childNode)
 				} else {
 					raw.append(char)
-					group["(", default: 0] -= 1
+					group["(", default: 0] += 1
 				}
 				
 				
 			case "<":
+				if isInConcreteGroup("'") || isInConcreteGroup("\"") {
+					raw.append(char) // We should append if we in comma group
+				}
 				group["<", default: 0] += 1
 				
 			case ">":
+				if isInConcreteGroup("'") || isInConcreteGroup("\"") {
+					raw.append(char) // We should append if we in comma group
+				}
 				group["<", default: 0] -= 1
 				
 			case "]":

@@ -1,0 +1,3 @@
+(source_file "/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift"
+	(import_decl range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:9:1 - line:9:8] 'DITranquillity')
+	(protocol range=[/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:11:9 - line:11:30] "MyProtocol" <Self : MyProtocol> interface type='MyProtocol.Protocol' access=private non-resilient requirement signature=<Self>))
