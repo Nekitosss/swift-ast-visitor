@@ -1,4 +1,46 @@
 
+public enum OptionalNode {
+	case one(ASTNode)
+	case several([ASTNode])
+	case none
+	
+	public func getOne() -> ASTNode? {
+		switch self {
+		case .one(let value):
+			return value
+		default:
+			return nil
+		}
+	}
+	
+	public func getSeveral() -> [ASTNode]? {
+		switch self {
+		case .several(let value) where !value.isEmpty:
+			return value
+		default:
+			return nil
+		}
+	}
+	
+	public subscript(kind: ASTNodeKind) -> OptionalNode {
+		switch self {
+		case .one(let value):
+			return value[kind]
+		case .several(let value):
+			let values = value.flatMap({ $0.children.filter({ $0.kind == kind }) })
+			if values.isEmpty {
+				return .none
+			} else {
+				return .several(values)
+			}
+			
+		case .none:
+			return .none
+		}
+	}
+	
+}
+
 public class ASTNode {
 	public var kind: ASTNodeKind
 	public var children: [ASTNode]
@@ -24,10 +66,21 @@ public class ASTNode {
 		}
 	}
 	
-	subscript(tokenKey key: TokenKey) -> Token? {
+	public subscript(tokenKey key: TokenKey) -> Token? {
 		return self.info.first(where: { $0.key == key.rawValue })
 	}
 	
+	public subscript(kind: ASTNodeKind) -> OptionalNode {
+		let foundedChildren = children.filter({ $0.kind == kind })
+		switch foundedChildren.count {
+		case ...0:
+			return .none
+		case 1:
+			return .one(foundedChildren[0])
+		default:
+			return .several(foundedChildren)
+		}
+	}
 }
 
 public enum TypedNode {

@@ -1,6 +1,6 @@
 
 
-enum TokenKey: String {
+public enum TokenKey: String {
 	case range
 	case type
 	case location

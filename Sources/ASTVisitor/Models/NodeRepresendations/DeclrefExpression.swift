@@ -28,7 +28,6 @@ public struct DeclrefExpression {
 		if let substitutionMap = node.children.first(where: { $0.kind == .substitutionMap }) {
 			let substitutionTokenList = substitutionMap.children.filter { $0.kind == .substitution }
 			substitution = substitutionTokenList.compactMap(Substitution.init(node:)).reduce(into: [:]) { $0[$1.from] = $1.to }
-			print(1)
 		} else {
 			substitution = [:]
 		}
