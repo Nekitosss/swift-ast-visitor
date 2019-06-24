@@ -1,0 +1,1 @@
+(substitution_map generic_signature=<Impl, Parent> (substitution Impl -> MyTypealias) (substitution Parent -> (MyProtocol & MySecondProtocol)))

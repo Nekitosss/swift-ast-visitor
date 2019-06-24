@@ -17,12 +17,12 @@ final class ASTVisitorTests: XCTestCase {
 		let file = fileContent(fileName: "TestComposedTypealiasFailure")
 		let visitor = Visitor(content: file)
 		
-		visitor.visit(predicate: { $0.kind == .substitutionMap }, visitChildNodesForFoundedPredicate: true) { node, parents in
+		visitor.visit(predicate: { $0.kind == .declrefExpr }, visitChildNodesForFoundedPredicate: true) { node, parents in
 			
 			switch node.typedNode {
 			case .functionDeclaration(let info):
 				print(info)
-			case .unknown:
+			default:
 				break
 			}
 		}
@@ -86,6 +86,35 @@ final class ASTVisitorTests: XCTestCase {
 		}
 		
 		XCTAssertEqual(node[tokenKey: .bind]?.value, "DITranquillity.(file).DIContainer")
+	}
+	
+	func testSubstitutionBuilding() {
+		let ast = parser.parse(content: fileContent(fileName: "TestSubstitutionBuilding"))
+		
+		guard let node = ast.children.first else {
+			XCTFail()
+			return
+		}
+		
+		XCTAssertEqual(node.children.count, 2)
+		
+		let plainSubstitution = node.children[0]
+		switch plainSubstitution.typedNode {
+		case .substitution(let info):
+			XCTAssertEqual(info.from, "Impl")
+			XCTAssertEqual(info.to, "MyTypealias")
+		default:
+			XCTFail()
+		}
+		
+		let complexSubstitution = node.children[1]
+		switch complexSubstitution.typedNode {
+		case .substitution(let info):
+			XCTAssertEqual(info.from, "Parent")
+			XCTAssertEqual(info.to, "MyProtocol & MySecondProtocol")
+		default:
+			XCTFail()
+		}
 	}
 	
 }

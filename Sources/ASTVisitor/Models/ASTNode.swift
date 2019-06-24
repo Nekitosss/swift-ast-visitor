@@ -13,7 +13,12 @@ public class ASTNode {
 	
 	func add(token: Token) {
 		if kind == .unspecified {
-			kind = ASTNodeKind(rawValue: token.value) ?? .unknown
+			if let parsedKind = ASTNodeKind(rawValue: token.value) {
+				kind = parsedKind
+			} else {
+				kind = .unknown
+				info.append(token)
+			}
 		} else {
 			info.append(token)
 		}
@@ -27,12 +32,24 @@ public class ASTNode {
 
 public enum TypedNode {
 	case functionDeclaration(FunctionDeclaration)
+	case dotSyntaxCall(DotSyntaxCall)
+	case callExpression(CallExpression)
+	case declrefExpression(DeclrefExpression)
+	case substitution(Substitution)
 	case unknown
 	
 	init(node: ASTNode) {
 		switch node.kind {
 		case .funcDecl:
 			self = FunctionDeclaration(node: node).map { .functionDeclaration($0) } ?? .unknown
+		case .dotSyntaxCallExpr:
+			self = DotSyntaxCall(node: node).map { .dotSyntaxCall($0) } ?? .unknown
+		case .callExpr:
+			self = CallExpression(node: node).map { .callExpression($0) } ?? .unknown
+		case .declrefExpr:
+			self = DeclrefExpression(node: node).map { .declrefExpression($0) } ?? .unknown
+		case .substitution:
+			self =  Substitution(node: node).map { .substitution($0) } ?? .unknown
 		default:
 			self = .unknown
 		}
