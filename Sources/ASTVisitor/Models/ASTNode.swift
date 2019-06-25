@@ -89,6 +89,8 @@ public enum TypedNode {
 	case callExpression(CallExpression)
 	case declrefExpression(DeclrefExpression)
 	case substitution(Substitution)
+	case patternTyped(PatternTyped)
+	case component(Component)
 	case unknown
 	
 	init(node: ASTNode) {
@@ -102,9 +104,34 @@ public enum TypedNode {
 		case .declrefExpr:
 			self = DeclrefExpression(node: node).map { .declrefExpression($0) } ?? .unknown
 		case .substitution:
-			self =  Substitution(node: node).map { .substitution($0) } ?? .unknown
+			self = Substitution(node: node).map { .substitution($0) } ?? .unknown
+		case .patternTyped:
+			self = PatternTyped(node: node).map { .patternTyped($0) } ?? .unknown
+		case .component:
+			self = Component(node: node).map { .component($0) } ?? .unknown
 		default:
 			self = .unknown
+		}
+	}
+	
+	public func unwrap<T>(_ type: T.Type = T.self) -> T? {
+		switch self {
+		case .functionDeclaration(let value):
+			return value as? T
+		case .dotSyntaxCall(let value):
+			return value as? T
+		case .callExpression(let value):
+			return value as? T
+		case .declrefExpression(let value):
+			return value as? T
+		case .substitution(let value):
+			return value as? T
+		case .patternTyped(let value):
+			return value as? T
+		case .component(let value):
+			return value as? T
+		case .unknown:
+			return nil
 		}
 	}
 	

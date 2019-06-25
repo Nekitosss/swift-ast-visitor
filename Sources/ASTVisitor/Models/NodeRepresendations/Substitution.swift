@@ -1,7 +1,7 @@
 
 public struct Substitution {
-	let from: String
-	let to: String
+	public let from: String
+	public let to: String
 	
 	init?(node: ASTNode) {
 		guard node.kind == .substitution,

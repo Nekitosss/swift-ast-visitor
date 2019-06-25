@@ -1,10 +1,10 @@
 
 public struct DeclrefExpression {
 	
-	let type: String
-	let location: Location?
-	let range: LocationRange?
-	let substitution: [String: String]
+	public let type: String
+	public let location: Location?
+	public let range: LocationRange?
+	public let substitution: [String: String]
 	
 	init?(node: ASTNode) {
 		guard node.kind == .declrefExpr,

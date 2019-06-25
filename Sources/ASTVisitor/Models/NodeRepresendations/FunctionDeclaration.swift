@@ -2,9 +2,9 @@
 
 public struct FunctionDeclaration {
 	
-	let location: LocationRange
-	let name: String
-	let type: String
+	public let location: LocationRange
+	public let name: String
+	public let type: String
 	
 	init?(node: ASTNode) {
 		guard
