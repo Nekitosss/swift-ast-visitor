@@ -1,5 +1,5 @@
 
 public struct Token {
-	var key: String
-	var value: String
+	public internal(set) var key: String
+	public internal(set) var value: String
 }

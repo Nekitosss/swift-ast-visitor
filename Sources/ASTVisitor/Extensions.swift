@@ -1,7 +1,7 @@
 
 extension Array {
 	
-	subscript(safe safeIndex: Int) -> Array.Element? {
+	public subscript(safe safeIndex: Int) -> Array.Element? {
 		get {
 			guard safeIndex > 0 && safeIndex < self.count else { return nil }
 			return self[safeIndex]
