@@ -3,11 +3,11 @@ extension Array {
 	
 	public subscript(safe safeIndex: Int) -> Array.Element? {
 		get {
-			guard safeIndex > 0 && safeIndex < self.count else { return nil }
+			guard safeIndex >= 0 && safeIndex < self.count else { return nil }
 			return self[safeIndex]
 		}
 		set {
-			guard let new = newValue, safeIndex > 0 && safeIndex < self.count else { return }
+			guard let new = newValue, safeIndex >= 0 && safeIndex < self.count else { return }
 			self[safeIndex] = new
 		}
 	}
