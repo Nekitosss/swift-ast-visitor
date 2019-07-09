@@ -8,6 +8,8 @@ public enum OptionalNode {
 		switch self {
 		case .one(let value):
 			return value
+		case .several(let value):
+			return value.first
 		default:
 			return nil
 		}
@@ -17,6 +19,8 @@ public enum OptionalNode {
 		switch self {
 		case .several(let value) where !value.isEmpty:
 			return value
+		case .one(let value):
+			return [value]
 		default:
 			return nil
 		}
