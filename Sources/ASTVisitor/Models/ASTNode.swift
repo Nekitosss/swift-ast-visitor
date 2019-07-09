@@ -174,6 +174,7 @@ public enum ASTNodeKind: String {
 	case dotSelfExpr = "dot_self_expr"
 	case substitutionMap = "substitution_map"
 	case substitution = "substitution"
+	case typeExpr = "type_expr"
 	
 	case unspecified
 	case unknown

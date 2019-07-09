@@ -7,4 +7,5 @@ public enum TokenKey: String {
 	case decl
 	case id
 	case bind
+	case typerepr
 }
