@@ -8,8 +8,8 @@ public struct Component {
 	init?(node: ASTNode) {
 		guard
 			node.kind == .component,
-			let id = node[tokenKey: .id]?.value,
-			let bind = node[tokenKey: .bind]?.value
+			let id = node[tokenKey: .id].getOne()?.value,
+			let bind = node[tokenKey: .bind].getOne()?.value
 			else { return nil }
 		self.id = id
 		self.bind = bind

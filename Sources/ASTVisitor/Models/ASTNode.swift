@@ -1,10 +1,10 @@
 
-public enum OptionalNode {
-	case one(ASTNode)
-	case several([ASTNode])
+public enum OptionalValue<T> {
+	case one(T)
+	case several([T])
 	case none
 	
-	public func getOne() -> ASTNode? {
+	public func getOne() -> T? {
 		switch self {
 		case .one(let value):
 			return value
@@ -15,7 +15,7 @@ public enum OptionalNode {
 		}
 	}
 	
-	public func getSeveral() -> [ASTNode]? {
+	public func getSeveral() -> [T]? {
 		switch self {
 		case .several(let value) where !value.isEmpty:
 			return value
@@ -25,6 +25,13 @@ public enum OptionalNode {
 			return nil
 		}
 	}
+	
+}
+
+public typealias OptionalNode = OptionalValue<ASTNode>
+public typealias OptionalToken = OptionalValue<Token>
+
+extension OptionalNode {
 	
 	public subscript(kind: ASTNodeKind) -> OptionalNode {
 		switch self {
@@ -42,8 +49,8 @@ public enum OptionalNode {
 			return .none
 		}
 	}
-	
 }
+
 
 public class ASTNode {
 	public var kind: ASTNodeKind
@@ -70,8 +77,16 @@ public class ASTNode {
 		}
 	}
 	
-	public subscript(tokenKey key: TokenKey) -> Token? {
-		return self.info.first(where: { $0.key == key.rawValue })
+	public subscript(tokenKey key: TokenKey) -> OptionalToken {
+		let foundedToken = self.info.filter { $0.key == key.rawValue }
+		switch foundedToken.count {
+		case 0:
+			return .none
+		case 1:
+			return .one(foundedToken[0])
+		default:
+			return .several(foundedToken)
+		}
 	}
 	
 	public subscript(kind: ASTNodeKind) -> OptionalNode {
@@ -95,6 +110,7 @@ public enum TypedNode {
 	case substitution(Substitution)
 	case patternTyped(PatternTyped)
 	case component(Component)
+	case typealiasDeclaration(TypealiasDeclaration)
 	case unknown
 	
 	init(node: ASTNode) {
@@ -113,6 +129,8 @@ public enum TypedNode {
 			self = PatternTyped(node: node).map { .patternTyped($0) } ?? .unknown
 		case .component:
 			self = Component(node: node).map { .component($0) } ?? .unknown
+		case .typealiasDecl:
+			self = TypealiasDeclaration(node: node).map { .typealiasDeclaration($0) } ?? .unknown
 		default:
 			self = .unknown
 		}
@@ -133,6 +151,8 @@ public enum TypedNode {
 		case .patternTyped(let value):
 			return value as? T
 		case .component(let value):
+			return value as? T
+		case .typealiasDeclaration(let value):
 			return value as? T
 		case .unknown:
 			return nil

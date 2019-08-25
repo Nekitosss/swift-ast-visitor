@@ -1,0 +1,1 @@
+(typealias range=[/Users/nikita/Library/Developer/Xcode/DerivedData/DITranquillityLinter-dwlavfvwsieyfogpqhrwkaevxngn/Build/Products/Debug/TestFiles.bundle/TestTypealiasedClassRegistration.swift:12:9 - line:12:38] "MyClassTypealias" interface type='MyClassTypealias.Type' access=private type='MyClass')

@@ -7,10 +7,10 @@ public struct ErasureExpression {
 	
 	init?(node: ASTNode) {
 		guard node.kind == .erasureExpr,
-			let typeToken = node[tokenKey: .type],
-			let locationToken = node[tokenKey: .location]?.value,
+			let typeToken = node[tokenKey: .type].getOne(),
+			let locationToken = node[tokenKey: .location].getOne()?.value,
 			let location = Location(string: locationToken),
-			let rangeToken = node[tokenKey: .range]?.value,
+			let rangeToken = node[tokenKey: .range].getOne()?.value,
 			let range = LocationRange(string: rangeToken)
 			else { return nil }
 		self.type = typeToken.value

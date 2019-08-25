@@ -8,4 +8,5 @@ public enum TokenKey: String {
 	case id
 	case bind
 	case typerepr
+	case access
 }

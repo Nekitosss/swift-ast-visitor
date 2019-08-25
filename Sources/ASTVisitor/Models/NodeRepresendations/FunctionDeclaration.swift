@@ -9,10 +9,10 @@ public struct FunctionDeclaration {
 	init?(node: ASTNode) {
 		guard
 			node.kind == .funcDecl,
-			let locationToken = node[tokenKey: .range],
+			let locationToken = node[tokenKey: .range].getOne(),
 			let location = LocationRange(string: locationToken.value),
 			let nameToken = node.info[safe: 1],
-			let typeToken = node[tokenKey: .type]
+			let typeToken = node[tokenKey: .type].getOne()
 			else { return nil }
 		
 		self.location = location

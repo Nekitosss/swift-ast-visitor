@@ -8,9 +8,9 @@ public struct CallExpression {
 	
 	init?(node: ASTNode) {
 		guard node.kind == .dotSyntaxCallExpr,
-			let typeToken = node[tokenKey: .type],
-			let locationToken = node[tokenKey: .location],
-			let rangeToken = node[tokenKey: .range],
+			let typeToken = node[tokenKey: .type].getOne(),
+			let locationToken = node[tokenKey: .location].getOne(),
+			let rangeToken = node[tokenKey: .range].getOne(),
 			let location = Location(string: locationToken.value),
 			let range = LocationRange(string: rangeToken.value)
 			else { return nil }

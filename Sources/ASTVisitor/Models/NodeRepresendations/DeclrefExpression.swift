@@ -8,18 +8,18 @@ public struct DeclrefExpression {
 	
 	init?(node: ASTNode) {
 		guard node.kind == .declrefExpr,
-			let typeToken = node[tokenKey: .type]
+			let typeToken = node[tokenKey: .type].getOne()
 			else { return nil }
 		
 		self.type = typeToken.value
 		
-		if let locationToken = node[tokenKey: .location], let location = Location(string: locationToken.value) {
+		if let locationToken = node[tokenKey: .location].getOne(), let location = Location(string: locationToken.value) {
 			self.location = location
 		} else {
 			self.location = nil
 		}
 		
-		if let rangeToken = node[tokenKey: .range], let range = LocationRange(string: rangeToken.value) {
+		if let rangeToken = node[tokenKey: .range].getOne(), let range = LocationRange(string: rangeToken.value) {
 			self.range = range
 		} else {
 			self.range = nil

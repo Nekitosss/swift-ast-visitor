@@ -85,7 +85,7 @@ final class ASTVisitorTests: XCTestCase {
 			return
 		}
 		
-		XCTAssertEqual(node[tokenKey: .bind]?.value, "DITranquillity.(file).DIContainer")
+		XCTAssertEqual(node[tokenKey: .bind].getOne()?.value, "DITranquillity.(file).DIContainer")
 	}
 	
 	func testSubstitutionBuilding() {
@@ -112,6 +112,23 @@ final class ASTVisitorTests: XCTestCase {
 		case .substitution(let info):
 			XCTAssertEqual(info.from, "Parent")
 			XCTAssertEqual(info.to, "MyProtocol & MySecondProtocol")
+		default:
+			XCTFail()
+		}
+	}
+	
+	func testTypealiasDeclaration() {
+		let ast = parser.parse(content: fileContent(fileName: "TestTypealiasDeclaration"))
+		
+		guard let node = ast.children.first else {
+			XCTFail()
+			return
+		}
+		
+		switch node.typedNode {
+		case .typealiasDeclaration(let info):
+			XCTAssertEqual(info.sourceTypeName, "MyClass")
+			XCTAssertEqual(info.name, "MyClassTypealias.Type")
 		default:
 			XCTFail()
 		}

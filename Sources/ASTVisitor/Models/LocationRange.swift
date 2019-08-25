@@ -23,10 +23,12 @@ public struct LocationRange {
 	
 	// "/Users/mockuser/development/ast/TestComposedTypealiasFailure.swift:27:13 - line:27:13" -> LocationRange
 	init?(string: String) {
-		let parts = string.split(separator: "-")
+		// We reverse parts to properly handle "-" (dashes) in file name. So we split one time by last dash
+		let parts = string.reversed().split(separator: "-", maxSplits: 1, omittingEmptySubsequences: true).map { String($0.reversed()) }
 		guard parts.count == 2 else { return nil }
-		let first = parts[0].trimmingCharacters(in: .whitespacesAndNewlines)
-		let last = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
+		// first is "1" and "0" is last cause of reversed parts
+		let first = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
+		let last = parts[0].trimmingCharacters(in: .whitespacesAndNewlines)
 		
 		guard let start = Location(string: first),
 			let end = Location(string: last)
