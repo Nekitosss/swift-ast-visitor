@@ -60,19 +60,6 @@ final class Parser {
 					group["(", default: 0] += 1
 				}
 				
-				
-			case "<":
-				if isInConcreteGroup("'") || isInConcreteGroup("\"") {
-					raw.append(char) // We should append if we in comma group
-				}
-				group["<", default: 0] += 1
-				
-			case ">":
-				if isInConcreteGroup("'") || isInConcreteGroup("\"") {
-					raw.append(char) // We should append if we in comma group
-				}
-				group["<", default: 0] -= 1
-				
 			case "]":
 				// TODO: String -> Int неверно обрабатывается из-за ">"
 				group["[", default: 0] -= 1
