@@ -136,6 +136,7 @@ public enum TypedNode {
 		}
 	}
 	
+	
 	public func unwrap<T>(_ type: T.Type = T.self) -> T? {
 		switch self {
 		case .functionDeclaration(let value):

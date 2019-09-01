@@ -5,6 +5,17 @@ final class ASTVisitorTests: XCTestCase {
 	
 	private let parser = Parser()
 	
+	static var allTests = [
+		("testAstParsing", testAstParsing),
+		("testAstVisiting", testAstVisiting),
+		("testSourceFile", testSourceFile),
+		("testSquareBracketProperParsing", testSquareBracketProperParsing),
+		("testPlainChildrenParsing", testPlainChildrenParsing),
+		("testCommaGrouping", testCommaGrouping),
+		("testBracketInTokenUsage", testBracketInTokenUsage),
+		("testSubstitutionBuilding", testSubstitutionBuilding),
+		("testTypealiasDeclaration", testTypealiasDeclaration)
+	]
 	
 	func testAstParsing() {
 		let file = fileContent(fileName: "TestComposedTypealiasFailure")
@@ -137,8 +148,19 @@ final class ASTVisitorTests: XCTestCase {
 }
 
 func fileContent(fileName: String) -> String {
-	let testFileBundlePath = Bundle(for: ASTVisitorTests.self).path(forResource: "TestFiles", ofType: "bundle")!
+	print(FileManager.default.currentDirectoryPath)
+	#if canImport(ObjectiveC)
+
+	let bundle = Bundle(for: ASTVisitorTests.self)
+	let testFileBundlePath = bundle.path(forResource: "TestFiles", ofType: "bundle")!
 	let filePath = Bundle(path: testFileBundlePath)!.path(forResource: fileName, ofType: "ast")!
 	let data = FileManager.default.contents(atPath: filePath)!
 	return String(data: data, encoding: .utf8)!
+
+	#else
+
+	let filePath = FileManager.default.currentDirectoryPath + "/TestFiles.bundle/" + fileName + ".ast"
+	let data = FileManager.default.contents(atPath: filePath)!
+	return String(data: data, encoding: .utf8)!
+	#endif
 }

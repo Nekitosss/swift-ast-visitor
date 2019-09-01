@@ -9,7 +9,7 @@ public struct Substitution {
 			else { return nil }
 		self.from = from
 		
-		if let to = node.info.last?.value, to != "-" {
+		if let to = node.info.last?.value, to != "->" {
 			self.to = to
 		} else if let child = node.children.first { // TODO: Check something like (A) -> (B) -> (C)
 			self.to = child.info.map({ $0.value }).joined(separator: " ")

@@ -1,7 +1,7 @@
 import XCTest
+@testable import ASTVisitorTests
 
-import swift_ast_visitorTests
 
-var tests = [XCTestCaseEntry]()
-tests += swift_ast_visitorTests.allTests()
+var tests = allManifestTests()
+
 XCTMain(tests)
