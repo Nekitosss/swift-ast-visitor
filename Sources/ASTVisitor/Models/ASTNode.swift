@@ -196,6 +196,10 @@ public enum ASTNodeKind: String {
 	case substitutionMap = "substitution_map"
 	case substitution = "substitution"
 	case typeExpr = "type_expr"
+	case constructorRefCallExpr = "constructor_ref_call_expr"
+	case booleanLiteralExpr = "boolean_literal_expr"
+	case keypathExpr = "keypath_expr"
+	
 	
 	case unspecified
 	case unknown

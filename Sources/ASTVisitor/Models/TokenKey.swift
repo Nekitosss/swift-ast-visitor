@@ -9,4 +9,5 @@ public enum TokenKey: String {
 	case bind
 	case typerepr
 	case access
+	case value
 }
