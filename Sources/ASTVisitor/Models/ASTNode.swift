@@ -199,6 +199,7 @@ public enum ASTNodeKind: String {
 	case constructorRefCallExpr = "constructor_ref_call_expr"
 	case booleanLiteralExpr = "boolean_literal_expr"
 	case keypathExpr = "keypath_expr"
+    case functionConversionExpr = "function_conversion_expr"
 	
 	
 	case unspecified
