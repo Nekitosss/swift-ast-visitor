@@ -145,6 +145,22 @@ final class ASTVisitorTests: XCTestCase {
 		}
 	}
 	
+	func testGenericSubstitution() {
+		let ast = parser.parse(content: fileContent(fileName: "TestGenericSubstitution"))
+		
+		guard let substitution = ast.children.first?[.substitutionMap].getOne()?[.substitution].getSeveral()?.last else {
+			XCTFail()
+			return
+		}
+		guard substitution.info.count == 3 else {
+			XCTFail("Substitution should contains: P0, ->, A<B>. Actual: \(substitution.info.map({ $0.value }))")
+			return
+		}
+		XCTAssertEqual(substitution.info[0].value, "P0")
+		XCTAssertEqual(substitution.info[1].value, "->")
+		XCTAssertEqual(substitution.info[2].value, "DIByTag<MyTag, String>")
+	}
+	
 }
 
 func fileContent(fileName: String) -> String {

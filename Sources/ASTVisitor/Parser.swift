@@ -69,6 +69,14 @@ final class Parser {
 					group["[", default: 0] += 1
 				}
 				
+			case "<":
+				group[char, default: 0] += 1
+				raw.append(char)
+				
+			case ">":
+				group["<", default: 0] -= 1
+				raw.append(char)
+				
 			case "\"", "'":
 				if commaSet.contains(char) {
 					commaSet.remove(char)
