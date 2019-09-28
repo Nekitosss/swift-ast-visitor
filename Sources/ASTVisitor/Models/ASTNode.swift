@@ -178,7 +178,7 @@ public enum ASTNodeKind: String {
 	case callExpr = "call_expr"
 	case memberRefExpr = "member_ref_expr"
 	case declrefExpr = "declref_expr"
-	case tupleShuffleExpr = "tuple_shuffle_expr"
+	case tupleShuffleExpr = "argument_shuffle_expr"
 	case tupleExpr = "tuple_expr"
 	case constructorDecl = "constructor_decl"
 	case destructorDecl = "destructor_decl"
