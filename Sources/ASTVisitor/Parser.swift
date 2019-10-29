@@ -33,7 +33,9 @@ final class Parser {
 				
 				if isInGroup() {
 					raw.append(char)
-					group["(", default: 0] -= 1
+					if isInConcreteGroup("(") {
+						group["(", default: 0] -= 1
+					}
 				} else {
 					if !raw.isEmpty {
 						token.value = raw
@@ -50,7 +52,6 @@ final class Parser {
 				let previousChar = content[elementBefore: index]
 				if isInGroup() {
 					raw.append(char)
-					group["(", default: 0] += 1
 				} else if isWhitespaceOrNewline(previousChar) {
 					index = content.index(after: index)
 					let childNode = extractChild(content: content, index: &index)

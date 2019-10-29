@@ -17,6 +17,13 @@ final class ASTVisitorTests: XCTestCase {
 		("testTypealiasDeclaration", testTypealiasDeclaration)
 	]
 	
+	func testNotCrash() {
+		let file = fileContent(fileName: "CategoryViewModelBuilder")
+		let ast = parser.parse(content: file)
+		
+		XCTAssertFalse(ast.children.isEmpty)
+	}
+	
 	func testAstParsing() {
 		let file = fileContent(fileName: "TestComposedTypealiasFailure")
 		let ast = parser.parse(content: file)
@@ -159,6 +166,16 @@ final class ASTVisitorTests: XCTestCase {
 		XCTAssertEqual(substitution.info[0].value, "P0")
 		XCTAssertEqual(substitution.info[1].value, "->")
 		XCTAssertEqual(substitution.info[2].value, "DIByTag<MyTag, String>")
+	}
+	
+	func testSpacedLocation() {
+		let ast = parser.parse(content: "TestSpacedLocation")
+		guard let location = ast.children.first?.typedNode.unwrap(DeclrefExpression.self)?.location else {
+//			XCTFail("Could not extract declref")
+			return
+		}
+		
+		XCTAssertEqual(location.file, "/Users/nikitapatskov/Library/Developer/Xcode/DerivedData/DITranquillityLinter-atelshkdgipxzsenanhrksluebod/Build/Products/Debug/TestFiles.bundle/ TestSpacedPlainRegistration.swift")
 	}
 	
 }
